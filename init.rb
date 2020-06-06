@@ -1,3 +1,5 @@
+require 'redmine'
+
 Redmine::Plugin.register :sla_timer do
   name 'Sla Timer plugin'
   author 'Andriy Malakhivskyy'
@@ -8,6 +10,8 @@ Redmine::Plugin.register :sla_timer do
 end
 Rails.application.config.to_prepare do
   require_dependency 'issue_path'
-  require_dependency 'issue_controller_hook'
-  # require_dependency 'issue_query_path'
+  require_dependency 'issues_controller_hook'
+  require_dependency 'shared'
 end
+
+# require 'redmine_helpdesk'
