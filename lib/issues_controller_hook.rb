@@ -1,5 +1,3 @@
-require 'working_hours'
-
 class IssuesControllerHook < Redmine::Hook::ViewListener
   include Shared
 
@@ -11,13 +9,10 @@ class IssuesControllerHook < Redmine::Hook::ViewListener
   def controller_issues_edit_before_save(context = {})
     issue = context[:issue]
     return unless issue
-    tt = time_in_hours(issue.created_on.working_time_until(Time.zone.now))
-    byebug      
 
     issue.build_sla_issue unless issue.sla_issue
     if issue.status != issue.tracker.default_status && issue.sla_issue.reaction_time.blank?
       issue.sla_issue.reaction_time = working_time_passed_in_hours(issue.created_on)
-      # time_passed_in_hours(issue.created_on)
-    end  
+    end
   end
 end

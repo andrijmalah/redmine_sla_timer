@@ -1,3 +1,5 @@
+require 'working_hours'
+
 module Shared
   SECONDS_IN_HOUR = 3600
 
@@ -11,7 +13,7 @@ module Shared
   }
   
   # Configure timezone (uses activesupport, defaults to UTC)
-  WorkingHours::Config.time_zone = 'Paris'
+  WorkingHours::Config.time_zone = Time.zone.name
   
   # Configure holidays
   WorkingHours::Config.holidays = [Date.new(2014, 12, 31)]
@@ -21,8 +23,7 @@ module Shared
   end
 
   def working_time_passed_in_hours(from)
-    return unless from
-    byebug      
+    return unless from    
 
     time_in_hours(from.working_time_until(Time.zone.now))
   end
