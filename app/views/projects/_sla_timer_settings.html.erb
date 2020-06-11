@@ -1,1 +1,35 @@
-SLA
+SLA <%= DateTime.current %>
+
+<%= form_for @project, :url => sla_timer_settings_update_path(@project), method: :patch, :html => {:id => 'sla_settings' }  do |f| %>
+  <%= hidden_field_tag(:tab, 'sla_timer') %>
+  <div class="box">
+    <ul id="sla_timer_setting" class="flat">
+    <% if @project.sla_timer_settings %>
+
+      <%= f.fields_for :sla_timer_settings do |ff| %>
+        <li>
+          <%= ff.number_field :reaction_time, :min => 0, :step => '0.1' %>
+          <%= ff.color_field :decoration %>
+          <%= delete_link project_sla_timer_setting_path(@project, ff.object.id, :tab => 'sla_timer') %>
+        </li>  
+      <% end %>
+    <% end %>    
+    <%= f.submit l(:button_save) %>
+  </ul>
+</div>
+<% end %>
+
+<p><%= l(:label_enumeration_new) %></p>
+
+<%= form_tag project_sla_timer_settings_path(@project.id), :method => 'post', :remote => true do %>
+  <p><%= number_field_tag 'project[sla_timer_settings_attributes][reaction_time]', '1', :min => 0, :step => '0.1'  %>
+  <%= color_field_tag 'project[sla_timer_settings_attributes][decoration]' %>
+  <%= submit_tag(l(:button_add)) %></p>
+<% end %>
+
+<fieldset class="box tabular">
+  <legend><%= l(:label_parent_task_attributes) %></legend>
+  <div class="tabular settings">
+    work time:
+  </div>
+</fieldset>

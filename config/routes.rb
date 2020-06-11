@@ -1,4 +1,9 @@
 # Plugin's routes
 # See: http://guides.rubyonrails.org/routing.html
-get 'sla_projects', :to => 'sla_projects#index'
-get 'projects/:project_id/sla_projects', :to => 'sla_projects#index'
+
+match 'projects/:project_id/sla_timer_settings', :to => 'sla_timer_settings#update', :via => [:put, :patch], as: :sla_timer_settings_update
+
+resources :projects do
+  resources :sla_timer_settings
+  # , :only => [:new, :create]
+end

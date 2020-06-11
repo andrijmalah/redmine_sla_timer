@@ -27,13 +27,4 @@ module Shared
 
     time_in_hours(from.working_time_until(Time.zone.now))
   end
-
-  # def time_substruct_in_hours(min, sub)
-  #   (min - sub) / SECONDS_IN_HOUR
-  # end
-
-  # def time_passed_in_hours(since_time)
-  #   time_in_hours(Time.zone.now - since_time)
-  # end
-
 end
