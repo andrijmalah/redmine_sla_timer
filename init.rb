@@ -25,4 +25,5 @@ Rails.application.config.to_prepare do
   require_dependency 'sla_issues_helper'
   require_dependency 'projects_helper_path'
   require_dependency 'project_path'
+  require_dependency 'settings_helper'
 end

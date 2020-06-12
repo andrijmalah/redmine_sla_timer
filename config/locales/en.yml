@@ -1,3 +1,4 @@
 # English strings go here for Rails i18n
 en:
   field_sla_timer: "SLA timer"
+  label_sla_timer_work_time: "Work time"
