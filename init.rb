@@ -13,9 +13,6 @@ Redmine::Plugin.register :redmine_sla_timer do
   end
 end
 
-
-
-
 Rails.application.config.to_prepare do
   require_dependency 'issue_path'
   require_dependency 'view_issue_hook'

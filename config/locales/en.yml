@@ -1,4 +1,10 @@
 # English strings go here for Rails i18n
 en:
-  field_sla_timer: "SLA timer"
-  label_sla_timer_work_time: "Work time"
+  field_sla_timer: SLA timer
+  label_sla_timer_work_time: Work time
+  field_reaction_time: Reaction time from
+  field_decoration: Timer text color
+  field_work_time_from: Work time from
+  field_work_time_to: Work time to
+  setting_work_days: Work days
+  label_reaction_time_new: New value for reaction time

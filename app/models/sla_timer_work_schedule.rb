@@ -2,7 +2,13 @@ class SlaTimerWorkSchedule < ActiveRecord::Base
   belongs_to :project
 
   def days_time
-    JSON.parse self[:days_time].gsub('=>', ':')
+    empty = {'work_time' => {'from' => 0, 'to' => 0}, 'work_days' => []}
+    if self[:days_time]
+      dt = JSON.parse self[:days_time].gsub('=>', ':')
+      dt.is_a?(Hash) ? dt : empty
+    else
+      empty
+    end
   end
 
   def work_time_from=(h)

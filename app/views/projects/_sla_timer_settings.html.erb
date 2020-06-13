@@ -1,81 +1,48 @@
-
-SLA <%= DateTime.current %>
-<%# labelled_form_for %>
-<%# form_for @project, :url => sla_timer_settings_update_path(@project), method: :patch, :html => {:id => 'sla_settings' }  do |f| %>
 <%= labelled_form_for @project, :url => sla_timer_settings_update_path(@project), method: :patch, :html => {:id => 'sla_settings' }  do |f| %>
-
   <%= hidden_field_tag(:tab, 'sla_timer') %>
-  <div class="box">
+  <div class="box sla_timer">
     <ul id="sla_timer_setting" class="flat">
-    <% if @project.sla_timer_settings %>
-
-      <%= f.fields_for :sla_timer_settings do |ff| %>
-        <li>
-          <%= ff.hours_field :reaction_time, :size => 3 %>
-          <%= ff.color_field :decoration %>
-          <%= delete_link project_sla_timer_setting_path(@project, ff.object.id, :tab => 'sla_timer') %>
-        </li>  
-      <% end %>
-    <% end %>    
-<%#
-  days_of_week= (0..6).map {|d| [day_name(d), d.to_s]} 
-  setting  = :work_days
-  options={inline: true}
-    content_tag("label", l(options[:label] || "setting_#{setting}")) +
-      # hidden_field_tag("settings[#{setting}][]", '').html_safe +
-      days_of_week.collect do |choice|
-        text, value = choice
-        content_tag(
-          'label',
-          check_box_tag(
-             "project[sla_timer_work_schedule_attributes[days_time][#{setting}]][]",
-             value,
-             false,
-             :id => nil
-           ) + text.to_s,
-          :class => (options[:inline] ? 'inline' : 'block')
-         )
-      end.join.html_safe          
-%>
-
-<p>
-
-      <p></p>
-
-      <%= f.fields_for :sla_timer_work_schedule do |ff| %>
-        <li>
-          <%= ff.hours_field :work_time_from, :size => 3 %>
-          <%= ff.hours_field :work_time_to, :size => 3 %>
-        </li>  
-      <% end %>
-<%# byebug %>
-<%= days_of_week_select(@project.sla_timer_work_schedule.work_days) %>
-
-<%#   byebug %>
-
-  <%# f.hours_field :work_time_from %>
-    <%# f.hours_field :work_time_to %>
-  <%# text_field_tag 'project[sla_timer_work_schedule_attributes[work_time_from]]', @project.sla_timer_work_schedule.work_time_from, :size => 3 %>
-  <%# label_tag :work_time_from %>
-  <%# text_field_tag 'project[sla_timer_work_schedule_attributes[days_time[work_time][from]]]]', @project.sla_timer_work_schedule.days_time['work_time']['from'], :size => 3 %>
-  <%# label_tag :work_time_to %>
-  <%# text_field_tag 'project[sla_timer_work_schedule_attributes[days_time[work_time][to]]]]', @project.sla_timer_work_schedule.days_time['work_time']['to'], :size => 3 %>
-
-</p>
-<p>
-
-</p>
-
-<p><%= f.submit l(:button_save) %></p>
-  </ul>
-</div>
+      <% if @project.sla_timer_settings %>
+        <%= f.fields_for :sla_timer_settings do |ff| %>
+          <li>
+            <%= ff.hours_field :reaction_time, :size => 3 %>
+            <%= ff.color_field :decoration %>
+            <%= delete_link project_sla_timer_setting_path(@project, ff.object.id, :tab => 'sla_timer') %>
+          </li>  
+        <% end %>
+      <% end %>    
+      <p>
+        <%= f.fields_for :sla_timer_work_schedule do |ff| %>
+          <li>
+            <%= ff.hours_field :work_time_from, :size => 3 %>
+            <%= ff.hours_field :work_time_to, :size => 3 %>
+          </li>  
+        <% end %>
+      </p>
+      <p><%= days_of_week_select(project_work_days(@project)) %></p>
+      <p><%= f.submit l(:button_save) %></p>
+    </ul>
+  </div>
 <% end %>
 
-<p><%= l(:label_enumeration_new) %></p>
+<p><%= l(:label_reaction_time_new) %></p>
+<fieldset class="tabular">
+<p>
+  <%= form_tag project_sla_timer_settings_path(@project.id), :method => 'post' do %>
+    <%= hidden_field_tag(:tab, 'sla_timer') %>
+    <%= number_field_tag 'project[sla_timer_settings_attributes][reaction_time]', '1', :min => 0, :step => '1' %>
+    <%= color_field_tag 'project[sla_timer_settings_attributes][decoration]' %>
+    <%= submit_tag(l(:button_add)) %>
+  <% end %>
+</p>
+</fieldset>
 
-<%= form_tag project_sla_timer_settings_path(@project.id), :method => 'post', :remote => true do %>
-  <p><%= number_field_tag 'project[sla_timer_settings_attributes][reaction_time]', '1', :min => 0, :step => '0.1'  %>
-  <%= color_field_tag 'project[sla_timer_settings_attributes][decoration]' %>
-  <%= submit_tag(l(:button_add)) %></p>
+<fieldset class="box tabular">
+</fieldset>
+
+
+
+<% content_for(:header_tags) do %>
+ 	<%= stylesheet_link_tag :sla_timer, :plugin => 'redmine_sla_timer' %>
 <% end %>
 

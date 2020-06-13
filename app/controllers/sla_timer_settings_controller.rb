@@ -9,7 +9,7 @@ class SlaTimerSettingsController < ApplicationController
     @value.attributes = sla_settings_params["sla_timer_settings_attributes"]
     @value.save
     respond_to do |format|
-      format.html { redirect_to project_sla_timer_settings_path(@project) }
+      format.html { redirect_to :controller => 'projects', :action => 'settings', :id => @project, :tab => params[:tab] }
       format.js
     end
   end
@@ -21,25 +21,18 @@ class SlaTimerSettingsController < ApplicationController
 
   def update
     new_attr = sla_settings_params.to_hash || {}
-    byebug
-    # new_attr['sla_timer_work_schedule_attributes'] = { :days_time => '00:00' }
     if @project.sla_timer_work_schedule
       new_attr['sla_timer_work_schedule_attributes'][:id] = @project.sla_timer_work_schedule.id
     end
 
-    # @project.update_attributes(sla_settings_params)
     @project.update_attributes(new_attr)
     redirect_to :controller => 'projects', :action => 'settings', :id => @project, :tab => params[:tab]
   end
 
-  def timer_update
-    days_time_config = sla_work_days_params[:sla_work_days_settings]
-    # sla_work_days_params[:sla_work_days_settings][:work_days].each do |day|
-      # days_time_config[WorkingHours::Config::DAYS_OF_WEEK[day.to_i]] = '00:00'
-      # days_config[day] = '00:00'
-    # end
-    redirect_to :controller => 'projects', :action => 'settings', :id => @project, :tab => params[:tab]
-  end
+  # def timer_update
+  #   days_time_config = sla_work_days_params[:sla_work_days_settings]
+  #   redirect_to :controller => 'projects', :action => 'settings', :id => @project, :tab => params[:tab]
+  # end
 
   private
 
