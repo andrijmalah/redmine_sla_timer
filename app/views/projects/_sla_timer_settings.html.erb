@@ -11,13 +11,13 @@ SLA <%= DateTime.current %>
 
       <%= f.fields_for :sla_timer_settings do |ff| %>
         <li>
-          <%= ff.hours_field :reaction_time, :min => 0, :step => '0.1' %>
+          <%= ff.hours_field :reaction_time, :size => 3 %>
           <%= ff.color_field :decoration %>
           <%= delete_link project_sla_timer_setting_path(@project, ff.object.id, :tab => 'sla_timer') %>
         </li>  
       <% end %>
     <% end %>    
-<%=
+<%#
   days_of_week= (0..6).map {|d| [day_name(d), d.to_s]} 
   setting  = :work_days
   options={inline: true}
@@ -39,12 +39,28 @@ SLA <%= DateTime.current %>
 %>
 
 <p>
+
+      <p></p>
+
+      <%= f.fields_for :sla_timer_work_schedule do |ff| %>
+        <li>
+          <%= ff.hours_field :work_time_from, :size => 3 %>
+          <%= ff.hours_field :work_time_to, :size => 3 %>
+        </li>  
+      <% end %>
+<%# byebug %>
+<%= days_of_week_select(@project.sla_timer_work_schedule.work_days) %>
+
 <%#   byebug %>
-<%= f.hours_field :work_time_from %>
-  <%= label_tag :work_time_from %>
-  <%= text_field_tag 'project[sla_timer_work_schedule_attributes[days_time[work_time][from]]]]', @project.sla_timer_work_schedule.days_time['work_time']['from'], :size => 3 %>
-  <%= label_tag :work_time_to %>
-  <%= text_field_tag 'project[sla_timer_work_schedule_attributes[days_time[work_time][to]]]]', @project.sla_timer_work_schedule.days_time['work_time']['to'], :size => 3 %>
+
+  <%# f.hours_field :work_time_from %>
+    <%# f.hours_field :work_time_to %>
+  <%# text_field_tag 'project[sla_timer_work_schedule_attributes[work_time_from]]', @project.sla_timer_work_schedule.work_time_from, :size => 3 %>
+  <%# label_tag :work_time_from %>
+  <%# text_field_tag 'project[sla_timer_work_schedule_attributes[days_time[work_time][from]]]]', @project.sla_timer_work_schedule.days_time['work_time']['from'], :size => 3 %>
+  <%# label_tag :work_time_to %>
+  <%# text_field_tag 'project[sla_timer_work_schedule_attributes[days_time[work_time][to]]]]', @project.sla_timer_work_schedule.days_time['work_time']['to'], :size => 3 %>
+
 </p>
 <p>
 
@@ -63,50 +79,3 @@ SLA <%= DateTime.current %>
   <%= submit_tag(l(:button_add)) %></p>
 <% end %>
 
-
-
---------------------------------
-      <p><%# setting_multiselect :non_working_week_days, (1..7).map {|d| [day_name(d), d.to_s]}, :inline => true %></p>
-<fieldset class="box">
-  <legend><%= l(:label_parent_task_attributes) %></legend>
-  <div class="tabular settings">
-  <%= form_tag({ controller: 'sla_timer_settings', action: 'timer_update', project_id: @project.id, tab: 'sla_timer'}, method: :post) do %>
-  
-    <%# form_tag('sla_timer_settings/timer_update', {:method => :put, :tab => 'sla_timer'}) do %>      
-      <% days_of_week= (0..6).map {|d| [day_name(d), d.to_s]} %>
-
-<%=
-  setting  = :work_days
-  options={inline: true}
-    content_tag("label", l(options[:label] || "setting_#{setting}")) +
-      # hidden_field_tag("settings[#{setting}][]", '').html_safe +
-      days_of_week.collect do |choice|
-        text, value = choice
-        content_tag(
-          'label',
-          check_box_tag(
-             "sla_timer_work_schedule[days_time][#{setting}][]",
-             value,
-             false,
-             :id => nil
-           ) + text.to_s,
-          :class => (options[:inline] ? 'inline' : 'block')
-         )
-      end.join.html_safe            
-%>
-
-      <p><%# setting_multiselect :non_working_week_days, (1..7).map {|d| [day_name(d), d.to_s]}, :inline => true %></p>
-      <p></p>
-    <label><%= l(:label_sla_timer_work_time) %></label>
-      <%= submit_tag l(:button_save) %>
-    <% end %>
-  </div>
-</fieldset>
-
-<div class="tab">
-  <ul>
-    <li style="display: none;"><a id="tab-1" class="" onclick="showTab('general', this.href); return false;" href="/settings?tab=general">General</a></li>
-    <li style="display: none;"><a id="tab-1" class="" onclick="showTab('general', this.href); return false;" href="/settings?tab=general">General</a></li>
-
-  </ul>
-</div>
