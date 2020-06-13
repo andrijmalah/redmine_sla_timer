@@ -11,35 +11,30 @@
           </li>  
         <% end %>
       <% end %>    
-      <p>
-        <%= f.fields_for :sla_timer_work_schedule do |ff| %>
-          <li>
-            <%= ff.hours_field :work_time_from, :size => 3 %>
-            <%= ff.hours_field :work_time_to, :size => 3 %>
-          </li>  
-        <% end %>
-      </p>
-      <p><%= days_of_week_select(project_work_days(@project)) %></p>
-      <p><%= f.submit l(:button_save) %></p>
     </ul>
   </div>
+  <p></p>
+  <fieldset class="box tabular">  
+    <%= f.fields_for :sla_timer_work_schedule do |ff| %>
+        <p><%= ff.hours_field :work_time_from, :size => 3 %></p>
+        <p><%= ff.hours_field :work_time_to, :size => 3 %></p>
+    <% end %>
+    <p><%= days_of_week_select(project_work_days(@project)) %></p>        
+  </fieldset>        
+  <p><%= f.submit l(:button_save) %></p>
 <% end %>
 
-<p><%= l(:label_reaction_time_new) %></p>
-<fieldset class="tabular">
-<p>
+<p></p>
+
+<div class="box">
+  <legend><%= l(:label_reaction_time_new) %><legend>   
   <%= form_tag project_sla_timer_settings_path(@project.id), :method => 'post' do %>
     <%= hidden_field_tag(:tab, 'sla_timer') %>
     <%= number_field_tag 'project[sla_timer_settings_attributes][reaction_time]', '1', :min => 0, :step => '1' %>
     <%= color_field_tag 'project[sla_timer_settings_attributes][decoration]' %>
     <%= submit_tag(l(:button_add)) %>
   <% end %>
-</p>
-</fieldset>
-
-<fieldset class="box tabular">
-</fieldset>
-
+</div>
 
 
 <% content_for(:header_tags) do %>

@@ -10,9 +10,6 @@ module ProjectPatch
     accepts_nested_attributes_for :sla_timer_settings, allow_destroy: true
     accepts_nested_attributes_for :sla_timer_work_schedule
 
-    def work_time_from
-      sla_timer_work_schedule.days_time['work_time']['from'].to_f
-    end
   end
 end
 
