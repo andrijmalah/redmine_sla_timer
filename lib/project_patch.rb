@@ -9,7 +9,6 @@ module ProjectPatch
 
     accepts_nested_attributes_for :sla_timer_settings, allow_destroy: true
     accepts_nested_attributes_for :sla_timer_work_schedule
-
   end
 end
 

@@ -1,10 +1,10 @@
 require_dependency 'issue_query'
 
-module IssueQueryPath
+module IssueQueryPatch
   extend ActiveSupport::Concern
 
   included do
     self.available_columns << QueryColumn.new(:sla_timer)
   end 
 end
-IssueQuery.send :include, IssueQueryPath
+IssueQuery.send :include, IssueQueryPatch
