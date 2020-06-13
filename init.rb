@@ -14,13 +14,14 @@ Redmine::Plugin.register :redmine_sla_timer do
 end
 
 Rails.application.config.to_prepare do
-  require_dependency 'issue_path'
+  require_dependency 'issue_patch'
   require_dependency 'view_issue_hook'
   require_dependency 'issues_controller_hook'
   require_dependency 'shared'
-  require_dependency 'issue_query_path'
+  require_dependency 'issue_query_patch'
   require_dependency 'sla_issues_helper'
-  require_dependency 'projects_helper_path'
-  require_dependency 'project_path'
+  require_dependency 'projects_helper_patch'
+  require_dependency 'project_patch'
   require_dependency 'settings_helper'
+  require_dependency 'queries_helper_patch'
 end

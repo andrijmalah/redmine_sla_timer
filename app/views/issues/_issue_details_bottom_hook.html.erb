@@ -1,7 +1,6 @@
 <div class="assigned-to attribute">
   <div class="label"><%= l(:field_sla_timer) %></div>
-
-  <div class="value" style="color:<%= @issue.sla_timer_font_color %>;"><%= @issue.sla_timer %></div>
-
-      <%= raw @issue.sla_timer_css_decoration %>
+  <div class="value">
+    <%= content_tag(:span, @issue.sla_timer, style: "color:#{@issue.sla_timer_font_color};") %>
+  </div>
 </div>
