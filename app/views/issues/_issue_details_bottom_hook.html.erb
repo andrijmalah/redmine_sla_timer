@@ -1,3 +1,4 @@
-<%= issue_fields_rows do |rows|
-  rows.left  l(:field_sla_timer), @issue.sla_timer, :class => 'spent_time'
-end %>
+<div class="assigned-to attribute">
+  <div class="label"><%= l(:field_sla_timer) %></div>
+  <div class="value"><%= @issue.sla_timer %></div>
+</div>
