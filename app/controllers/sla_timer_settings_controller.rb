@@ -55,10 +55,3 @@ class SlaTimerSettingsController < ApplicationController
     )
   end
 end
-# sla_timer_work_schedule_attributes: [:work_days => []],
-#<ActionController::Parameters 
-#{"settings"=>{"work_days"=>["1", "3"]}, "commit"=>"Save", "tab"=>"sla_timer", "controller"=>"sla_timer_settings", "action"=>"timer_update", "project_id"=>"buh"} permitted: false>
-
-#params.require(:project).permit(sla_timer_work_schedule_attributes: [:days_time => [:work_days => [], :work_time => []]])
-# "work_time_from"=>"1:18", "sla_timer_work_schedule_attributes"=>    {"days_time"=>{                  "work_time"=>  {"from"=>"1.3", "to"=>"00:02"}}, 
-#   "work_time_from"=>"1.4"}}
