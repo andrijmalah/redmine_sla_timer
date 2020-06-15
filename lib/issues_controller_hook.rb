@@ -26,16 +26,4 @@ class IssuesControllerHook < Redmine::Hook::ViewListener
 
     issue.sla_issue.reaction_time = working_time_passed_in_hours(issue.created_on)
   end
-
-  def controller_issues_edit_before_save_old(context = {})
-    issue = context[:issue]
-    return unless issue
-
-    return unless issue.project.enabled_module_names.include?(:sla_timer.to_s)
-    byebug
-    issue.build_sla_issue unless issue.sla_issue.present?
-    return if issue.status != issue.tracker.default_status && issue.sla_issue.reaction_time.blank?
-
-    issue.sla_issue.reaction_time = working_time_passed_in_hours(issue.created_on)
-  end
 end
