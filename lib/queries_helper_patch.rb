@@ -24,4 +24,4 @@ end
 
 unless QueriesHelper.included_modules.include?(QueriesHelperPatch)
   QueriesHelper.send :include, QueriesHelperPatch
-end  
+end

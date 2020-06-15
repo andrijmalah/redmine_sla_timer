@@ -5,6 +5,6 @@ module IssueQueryPatch
 
   included do
     self.available_columns << QueryColumn.new(:sla_timer)
-  end 
+  end
 end
 IssueQuery.send :include, IssueQueryPatch

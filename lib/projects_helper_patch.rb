@@ -27,7 +27,7 @@ module ProjectsHelperPatch
 
     def days_of_week_select(setting_values, options = { inline: true})
       setting_values = [] unless setting_values.is_a?(Array)
-      days_of_week = (0..6).map { |d| [day_name(d), d.to_s] }
+      days_of_week = (0..6).map { |d| [day_name(d), d] }
       setting = :work_days
         content_tag('label', l(options[:label] || "setting_#{setting}")) +
           days_of_week.collect do |choice|
