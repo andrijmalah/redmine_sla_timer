@@ -2,7 +2,7 @@ require_dependency 'issue'
 
 module IssuePatch
   extend ActiveSupport::Concern
-  
+
   included do
     has_one :sla_issue, :dependent => :destroy
 
@@ -20,11 +20,15 @@ module IssuePatch
         format_hours(project_work_schedule.work_time_from) => format_hours(project_work_schedule.work_time_to)
       }
       project_work_schedule.work_days.each do |d|
-        working_hours[WorkingHours::Config::DAYS_OF_WEEK[d]] = work_time
+        working_hours[Shared::DAYS_OF_WEEK[d]] = work_time
       end
       return if working_hours.empty?
 
-      WorkingHours::Config.working_hours = working_hours
+      Biz.configure do |config|
+        config.hours = working_hours
+        config.time_zone = User.current.time_zone ? User.current.time_zone.tzinfo.name : Time.zone.name
+      end
+
       working_time_passed_in_hours(created_on)
     end
 

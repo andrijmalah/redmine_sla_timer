@@ -9,10 +9,9 @@ class SlaTimerSettingsController < ApplicationController
     @value.attributes = sla_settings_params["sla_timer_settings_attributes"]
     if @value.save
       flash[:notice] = l(:notice_successful_update) 
-    end  
+    end
     respond_to do |format|
       format.html { redirect_to :controller => 'projects', :action => 'settings', :id => @project, :tab => params[:tab] }
-      format.js
     end
   end
 
@@ -36,11 +35,6 @@ class SlaTimerSettingsController < ApplicationController
     end
     redirect_to :controller => 'projects', :action => 'settings', :id => @project, :tab => params[:tab]
   end
-
-  # def timer_update
-  #   days_time_config = sla_work_days_params[:sla_work_days_settings]
-  #   redirect_to :controller => 'projects', :action => 'settings', :id => @project, :tab => params[:tab]
-  # end
 
   private
 

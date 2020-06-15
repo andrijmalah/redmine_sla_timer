@@ -19,9 +19,9 @@ Rails.application.config.to_prepare do
   require_dependency 'issues_controller_hook'
   require_dependency 'shared'
   require_dependency 'issue_query_patch'
-  require_dependency 'sla_issues_helper'
   require_dependency 'projects_helper_patch'
   require_dependency 'project_patch'
-  require_dependency 'settings_helper'
   require_dependency 'queries_helper_patch'
 end
+  # require_dependency 'sla_issues_helper'
+  # require_dependency 'settings_helper'

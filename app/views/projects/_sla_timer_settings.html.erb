@@ -23,9 +23,7 @@
   </fieldset>        
   <p><%= f.submit l(:button_save) %></p>
 <% end %>
-
 <p></p>
-
 <div class="box">
   <legend><%= l(:label_reaction_time_new) %><legend>   
   <%= form_tag project_sla_timer_settings_path(@project.id), :method => 'post' do %>
@@ -35,8 +33,6 @@
     <%= submit_tag(l(:button_add)) %>
   <% end %>
 </div>
-
-
 <% content_for(:header_tags) do %>
  	<%= stylesheet_link_tag :sla_timer, :plugin => 'redmine_sla_timer' %>
 <% end %>
