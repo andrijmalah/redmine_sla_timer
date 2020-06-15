@@ -1,4 +1,4 @@
-<%= labelled_form_for @project, :url => sla_timer_settings_update_path(@project), method: :patch, :html => {:id => 'sla_settings' }  do |f| %>
+<%= labelled_form_for @project, :url => project_sla_timer_setting_path(@project), method: :patch, :html => {:id => 'sla_settings' }  do |f| %>
   <%= hidden_field_tag(:tab, 'sla_timer') %>
   <div class="box sla_timer">
     <ul id="sla_timer_setting" class="flat">

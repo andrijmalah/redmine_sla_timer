@@ -2,12 +2,14 @@ class SlaTimerSettingsController < ApplicationController
   layout 'admin'
 
   before_action :find_project
-  before_action :find_sla_timer_setting, only: :destroy 
+  before_action :find_sla_timer_setting, only: :destroy
 
   def create
     @value = @project.sla_timer_settings.build
     @value.attributes = sla_settings_params["sla_timer_settings_attributes"]
-    @value.save
+    if @value.save
+      flash[:notice] = l(:notice_successful_update) 
+    end  
     respond_to do |format|
       format.html { redirect_to :controller => 'projects', :action => 'settings', :id => @project, :tab => params[:tab] }
       format.js
@@ -15,7 +17,11 @@ class SlaTimerSettingsController < ApplicationController
   end
 
   def destroy
-    @sla_timer_setting.destroy
+    if @sla_timer_setting.destroy
+      flash[:notice] = l(:notice_successful_delete)
+    else
+      flash[:error] = l(:notice_unsuccessful_save)
+    end
     redirect_to :controller => 'projects', :action => 'settings', :id => @project, :tab => params[:tab]
   end
 
@@ -25,7 +31,9 @@ class SlaTimerSettingsController < ApplicationController
       new_attr['sla_timer_work_schedule_attributes'][:id] = @project.sla_timer_work_schedule.id
     end
 
-    @project.update_attributes(new_attr)
+    if @project.update_attributes(new_attr)
+      flash[:notice] = l(:notice_successful_update)
+    end
     redirect_to :controller => 'projects', :action => 'settings', :id => @project, :tab => params[:tab]
   end
 
