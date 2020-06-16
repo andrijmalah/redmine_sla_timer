@@ -1,0 +1,9 @@
+ru:
+  field_sla_timer: SLA таймер
+  label_sla_timer_work_time: Рабочее время
+  field_reaction_time: Время реакции от
+  field_decoration: Таймер, цвет текста
+  field_work_time_from: Рабочее время от
+  field_work_time_to: Рабочее время до
+  setting_work_days: Рабочие дни
+  label_reaction_time_new: Новое значение времени реакции
