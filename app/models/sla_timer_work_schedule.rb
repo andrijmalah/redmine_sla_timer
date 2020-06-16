@@ -1,6 +1,12 @@
 class SlaTimerWorkSchedule < ActiveRecord::Base
   belongs_to :project
 
+  def days_time=(arg)
+    raise ArgumentError, 'days_time must be Hash' unless arg.is_a?(Hash)
+
+    super
+  end
+
   def days_time
     empty = {'work_time' => { 'from' => 0, 'to' => 0.01 }, 'work_days' => []}
     if self[:days_time]
