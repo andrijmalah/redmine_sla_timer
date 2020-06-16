@@ -1,3 +1,22 @@
-= sla_timer
+= Redmine Sla_timer plugin
 
-Description goes here
+== Install
+
+* Copy redmine_sla_timer plugin to {RAILS_APP}/plugins on your redmine path
+* Run bundle install --without development test RAILS_ENV=production
+* Run rake redmine:plugins NAME=redmine_sla_timer RAILS_ENV=production
+
+Note that this plugin depends on this other plugin: Biz
+
+<pre>
+rake redmine:plugins NAME=redmine_sla_timer VERSION=0 RAILS_ENV=production
+rm -r plugins/redmine_sla_timer
+</pre>
+
+=== Tables created by CRM plugin
+
+* sla_issue
+* sla_timer_settings
+* sla_timer_work_shedule
+
+== Requirements
