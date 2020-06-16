@@ -8,12 +8,14 @@
 
 Note that this plugin depends on this other plugin: Biz
 
+== Uninstall
+
 <pre>
 rake redmine:plugins NAME=redmine_sla_timer VERSION=0 RAILS_ENV=production
 rm -r plugins/redmine_sla_timer
 </pre>
 
-=== Tables created by CRM plugin
+=== Tables created by plugin
 
 * sla_issue
 * sla_timer_settings
