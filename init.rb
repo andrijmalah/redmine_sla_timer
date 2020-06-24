@@ -22,6 +22,7 @@ Rails.application.config.to_prepare do
   require_dependency 'projects_helper_patch'
   require_dependency 'project_patch'
   require_dependency 'queries_helper_patch'
+  require_dependency 'issues_controller_patch'
 end
   # require_dependency 'sla_issues_helper'
   # require_dependency 'settings_helper'
