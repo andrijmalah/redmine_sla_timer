@@ -1,5 +1,5 @@
 = Redmine Sla_timer plugin
-
+https://github.com/andrijmalah/redmine_sla_timer/blob/master/timer2.jpg
 == Install
 
 * Copy redmine_sla_timer plugin to {RAILS_APP}/plugins on your redmine path
