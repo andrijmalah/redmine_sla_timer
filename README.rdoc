@@ -1,4 +1,4 @@
-= Redmine Sla timer plugin
+= Redmine SLA timer plugin
 https://github.com/andrijmalah/redmine_sla_timer/blob/master/timer2.jpg
 == Install
 
